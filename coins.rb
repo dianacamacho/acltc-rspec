@@ -1,91 +1,19 @@
 require 'rspec'
 
 class Coins
-  def change(value)
+  def change(cents)
+    coin_values = [25,10,5,1] 
     change = []
-
-    if value / 25 > 0
-      quarters = value / 25
-      quarters.times do 
-        change << 25
-      end
+    
+    coin_values.each do |coin_value|
+      number_of_coins = cents / coin_value
       
-      value = value % 25
-
-      if value > 0
-        dimes = value / 10
-        dimes.times do
-          change << 10
-        end
-        value = value % 10 
-      end
-
-      if value > 0
-        nickles = value / 5
-        nickles.times do 
-          change << 5
-        end
-        value = value % 5
-      end
-      
-      if value > 0
-        pennies = value / 1
-        pennies.times do 
-          change << 1
-        end
-      end 
-
-    elsif value / 10 > 0
-      dimes = value / 10
-      dimes.times do
-        change << 10
-      end
-
-      value = value % 10
-
-      if value / 5 > 0
-        nickles = value / 5
-        nickles.times do 
-          change << 5
-        end
-        
-        value = value % 5
-        
-        if value / 1 > 0
-          pennies = value / 1
-          pennies.times do
-            change << 1
-          end
-        end 
-      elsif value / 1 > 0
-        pennies = value / 1
-        pennies.times do 
-          change << 1
-        end
-      end
-
-    elsif value / 5 > 0
-      nickles = value / 5
-      nickles.times do
-        change << 5
-      end
-      
-      value = value % 5
-      
-      if value / 1 > 0
-        pennies = value / 1
-        pennies.times do 
-          change << 1
-        end
-      end
-
-    elsif value / 1 > 0
-      pennies = value / 1
-      pennies.times do
-        change << 1
+      number_of_coins.times do
+        change << coin_value
+        cents -= coin_value
       end
     end
-    
+
     change
   end
 end
